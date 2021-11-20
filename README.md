@@ -13,7 +13,7 @@ this solution uses padding instead of parsing to sort integer values. testing pr
   
  some test results:
  <code>
-10000 items sorted in 00:00:00.7611699
+10000 items sorted in 00:00:00.7611699<br/>
 10000 items sorted in 00:00:00.6150440
 10000 items sorted in 00:00:00.6782930
 10000 items sorted in 00:00:00.7562298
