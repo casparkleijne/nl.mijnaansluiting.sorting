@@ -9,7 +9,7 @@ namespace nl.mijnaansluiting.sorting
         #region Private Fields
 
         /// <summary>
-        /// filters out all automatic named groups and returs only the "real-names"
+        /// filters out all automatic named groups and returns only the "real-names"
         /// </summary>
         private static readonly Func<Group, int, bool> groupFilter = (group, index) => !group.Name.Equals($"{index}") && group.Success;
 
