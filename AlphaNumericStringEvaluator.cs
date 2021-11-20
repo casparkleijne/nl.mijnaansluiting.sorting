@@ -16,7 +16,7 @@ namespace nl.mijnaansluiting.sorting
         /// <summary>
         /// The regex that parses the string to be compared
         /// </summary>
-        private static readonly Regex regex = new Regex(@"((?<int>\d+)|(?<string>[A-Za-z-]+)|(?<ignore>[\W\s]+))", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        private static readonly Regex regex = new Regex(@"((?<int>\d+)|(?<string>[A-Za-z-]+)|(?<special>[\W\s]+))", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
         #endregion Private Fields
 
@@ -44,7 +44,7 @@ namespace nl.mijnaansluiting.sorting
                 case "string":
                     return match.Value.ToLower();
 
-                case "ignore":
+                case "special":
                     return ".";
 
                 default:
