@@ -5,5 +5,5 @@ A sorting API for alphanumeric strings
 usage:
 
 
-<code>IEnumerable<Entity> sorted = ienumerable.OrderBy(entity => $"{entity.propertyAsString}", new AlphaNumericStringComparer());</code>
+<code>IEnumerable<Entity> sorted = unsorted.OrderBy(entity => $"{entity.propertyAsString}", new AlphaNumericStringComparer());</code>
               
