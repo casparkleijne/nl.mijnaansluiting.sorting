@@ -9,4 +9,6 @@ usage:
 this is used for e.g suffixes on addresses of houses that can vary a lot.
   
 note that it only handles numeric values with a max length of 16 characters.
+  
+  <i>note that pre-sorting makes this significant faster.</i>
               
