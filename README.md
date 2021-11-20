@@ -9,7 +9,7 @@ usage:
 this is used for e.g suffixes on addresses of houses that can vary a lot.
   
 note that it only handles numeric values with a max length of 16 characters.
-this solution uses padding instead of parsing to sort integer values. testing proves this has insignificant impact on  performance or memory.
+this solution uses padding instead of parsing to sort integer values. current local testing proves this has insignificant impact on  performance or memory.
   
  some test results:
 <code>
