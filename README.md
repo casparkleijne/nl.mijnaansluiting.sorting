@@ -12,10 +12,13 @@ note that it only handles numeric values with a max length of 16 characters.
 this solution uses padding instead of parsing to sort integer values. testing proves this has insignificant impact on  performance or memory.
   
  some test results:
- <code>
-10000 items sorted in 00:00:00.7611699<br/>
+<code>
+10000 items sorted in 00:00:00.7611699
+  
 10000 items sorted in 00:00:00.6150440
+  
 10000 items sorted in 00:00:00.6782930
+  
 10000 items sorted in 00:00:00.7562298
 10000 items sorted in 00:00:00.7927314
 10000 items sorted in 00:00:00.7939269
