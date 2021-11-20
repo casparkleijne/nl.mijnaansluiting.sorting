@@ -2,7 +2,7 @@
 
 namespace nl.mijnaansluiting.sorting
 {
-    public class AlphaNumericString : IComparable<AlphaNumericString>
+    internal class AlphaNumericString : IComparable<AlphaNumericString>
     {
         #region Private Fields
 
