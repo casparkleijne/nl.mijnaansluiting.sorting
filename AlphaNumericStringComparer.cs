@@ -28,11 +28,11 @@ namespace nl.mijnaansluiting.sorting
             switch (FindGroupName(match))
             {
                 case "negativeint":
-                    var value1 = $"{match.Value.Replace("-", string.Empty)}1".PadLeft(16, '0');
+                    var value1 = $".{match.Value.Replace("-", string.Empty)}1".PadLeft(16, '0');
                     return value1;
 
                 case "int":
-                    var value2 = $"{match.Value}0".PadLeft(16, '0');
+                    var value2 = $".{match.Value}0".PadLeft(16, '0');
                     return value2;
 
                 case "stringlower":
