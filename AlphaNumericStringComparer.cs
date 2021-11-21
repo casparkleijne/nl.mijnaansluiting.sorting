@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -9,18 +8,24 @@ namespace nl.mijnaansluiting.sorting
     {
         #region Private Fields
 
-        /// <summary>
-        /// The regex that parses the string to be compared
-        /// </summary>
-        private static readonly Regex regex = new Regex(@"((?<negativeint>-[\d]+)|(?<int>[\d]+)|(?<stringlower>[a-z]+)|(?<stringupper>[A-Z]+)|(?<special>[\s]+))", RegexOptions.Singleline);
+        private static readonly Regex regex = new Regex(@"((?<negativeint>[\-\+\$][\d]+)|(?<int>[\d]+)|(?<stringlower>[a-z]+)|(?<stringupper>[A-Z]+)|(?<special>[\s]+))", RegexOptions.Singleline);
 
         #endregion Private Fields
 
         #region Private Methods
 
-        private static string Evaluate(Match match)
+        private static string FindGroupName(Match match)
         {
-            switch (FindGroup(match)?.Name ?? string.Empty)
+            return match.Groups
+                .Cast<Group>()
+                .Where((group, index) => group.Success && !group.Name.Equals($"{index}"))
+                .Select(x => x.Name)
+                .FirstOrDefault();
+        }
+
+        private static string MatchEvaluator(Match match)
+        {
+            switch (FindGroupName(match))
             {
                 case "negativeint":
                     var value1 = $"{match.Value.Replace("-", string.Empty)}1".PadLeft(16, '0');
@@ -44,17 +49,9 @@ namespace nl.mijnaansluiting.sorting
             }
         }
 
-        /// <summary>
-        /// Finds the group of the match as defined by name in the regular expression.
-        /// </summary>
-        /// <param name="match">the match</param>
-        /// <returns></returns>
-        private static Group FindGroup(Match match)
+        private static string Parse(string value)
         {
-            return match.Groups
-                .Cast<Group>()
-                .Where((group, index) => !group.Name.Equals($"{index}") && group.Success)
-                .FirstOrDefault();
+            return regex.Replace(value, MatchEvaluator);
         }
 
         #endregion Private Methods
@@ -63,7 +60,7 @@ namespace nl.mijnaansluiting.sorting
 
         public int Compare(string left, string right)
         {
-            int result = regex.Replace(left, Evaluate).CompareTo(regex.Replace(right, Evaluate));
+            int result = Parse(left).CompareTo(Parse(right));
             return result == 0 ? right.CompareTo(left) : result;
         }
 
