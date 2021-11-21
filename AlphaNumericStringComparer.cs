@@ -8,7 +8,7 @@ namespace nl.mijnaansluiting.sorting
     {
         #region Private Fields
 
-        private static readonly Regex regex = new Regex(@"((?<negativeint>[\-\+\$][\d]+)|(?<int>[\d]+)|(?<stringlower>[a-z]+)|(?<stringupper>[A-Z]+)|(?<special>[\s]+))", RegexOptions.Singleline);
+        private static readonly Regex regex = new Regex(@"((?<intnegative>[\-\+\$][\d]+)|(?<int>[\d]+)|(?<stringlower>[a-z]+)|(?<stringupper>[A-Z]+)|(?<special>[\s]+))", RegexOptions.Singleline);
 
         #endregion Private Fields
 
@@ -27,7 +27,7 @@ namespace nl.mijnaansluiting.sorting
         {
             switch (FindGroupName(match))
             {
-                case "negativeint":
+                case "intnegative":
                     var value1 = $".{match.Value.Replace("-", string.Empty)}1".PadLeft(16, '0');
                     return value1;
 
