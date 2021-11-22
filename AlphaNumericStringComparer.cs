@@ -34,29 +34,30 @@ namespace nl.mijnaansluiting.sorting
             switch (FindGroupName(match))
             {
                 case "intnegative":
-                    var value1 = $"A{match.Value.Replace("-", string.Empty)}0".PadLeft(paddingTotalWidth, '0');
+                    var value1 = $"{match.Value.Replace("-", string.Empty)}0".PadLeft(paddingTotalWidth, '0');
                     return value1;
 
                 case "int":
-                    var value2 = $"A{match.Value}1".PadLeft(paddingTotalWidth, '0');
+                    var value2 = $"{match.Value}1".PadLeft(paddingTotalWidth, '0');
                     return value2;
 
                 case "stringlower":
-                    return $"C{match.Value}";
+                    return $"a{match.Value}";
 
                 case "stringupper":
-                    return $"D{match.Value}";
+                    return $"A{match.Value}";
 
                 case "special":
-                    return $"E{match.Value}";
+                    return $"?{match.Value}";
 
                 default:
-                    return $"F{match.Value}";
+                    return $"/{match.Value}";
             }
         }
 
         private string Parse(string value)
         {
+            value = value.Trim().Replace(" ", string.Empty);
             return regex.Replace(value, MatchEvaluator);
         }
 
