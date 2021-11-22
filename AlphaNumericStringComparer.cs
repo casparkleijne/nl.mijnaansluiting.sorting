@@ -9,6 +9,12 @@ namespace nl.mijnaansluiting.sorting
         #region Private Fields
 
         private static readonly Regex regex = new Regex(@"((?<intnegative>[\-\+\$][\d]+)|(?<int>[\d]+)|(?<stringlower>[a-z]+)|(?<stringupper>[A-Z]+)|(?<special>[\s]+))", RegexOptions.Singleline);
+        private readonly int paddingTotalWidth;
+
+        public AlphaNumericStringComparer(int paddingTotalWidth = 16)
+        {
+            this.paddingTotalWidth = paddingTotalWidth;
+        }
 
         #endregion Private Fields
 
@@ -23,33 +29,33 @@ namespace nl.mijnaansluiting.sorting
                 .FirstOrDefault();
         }
 
-        private static string MatchEvaluator(Match match)
+        private string MatchEvaluator(Match match)
         {
             switch (FindGroupName(match))
             {
                 case "intnegative":
-                    var value1 = $".{match.Value.Replace("-", string.Empty)}1".PadLeft(16, '0');
+                    var value1 = $"A{match.Value.Replace("-", string.Empty)}0".PadLeft(paddingTotalWidth, '0');
                     return value1;
 
                 case "int":
-                    var value2 = $".{match.Value}0".PadLeft(16, '0');
+                    var value2 = $"A{match.Value}1".PadLeft(paddingTotalWidth, '0');
                     return value2;
 
                 case "stringlower":
-                    return $"A{match.Value}";
+                    return $"C{match.Value}";
 
                 case "stringupper":
-                    return $"Z{match.Value}";
+                    return $"D{match.Value}";
 
                 case "special":
-                    return $"[{match.Value}";
+                    return $"E{match.Value}";
 
                 default:
-                    return $"/{match.Value}";
+                    return $"F{match.Value}";
             }
         }
 
-        private static string Parse(string value)
+        private string Parse(string value)
         {
             return regex.Replace(value, MatchEvaluator);
         }
